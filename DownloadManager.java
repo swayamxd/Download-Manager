@@ -145,3 +145,103 @@ JOptionPane.showMessageDialog(this,
 JOptionPane.ERROR_MESSAGE);
 }
 }
+private URL verifyUrl(String url) {
+// Only allow HTTP URLs.
+//if (!url.toLowerCase().startsWith("https://"))
+//return null;
+// Verify format of URL.
+URL verifiedUrl = null;
+try {
+
+
+
+verifiedUrl = new URL(url);
+} catch (Exception e) {
+return null;
+}
+// Make sure URL specifies a file.
+if (verifiedUrl.getFile().length() < 2)
+return null;
+return verifiedUrl;
+}
+// Called when table row selection changes.
+private void tableSelectionChanged() {
+/* Unregister from receiving notifications
+from the last selected download. */
+if (selectedDownload != null)
+selectedDownload.deleteObserver(DownloadManager.this);
+/* If not in the middle of clearing a download,
+set the selected download and register to
+receive notifications from it. */
+if (!clearing && table.getSelectedRow() > -1) {
+selectedDownload =
+tableModel.getDownload(table.getSelectedRow());
+selectedDownload.addObserver(DownloadManager.this);
+updateButtons();
+}
+}
+// Pause the selected download.
+private void actionPause() {
+selectedDownload.pause();
+updateButtons();
+}
+// Resume the selected download.
+private void actionResume() {
+selectedDownload.resume();
+updateButtons();
+}
+// Cancel the selected download.
+private void actionCancel() {
+selectedDownload.cancel();
+updateButtons();
+}
+// Clear the selected download.
+private void actionClear() {
+clearing = true;
+tableModel.clearDownload(table.getSelectedRow());
+clearing = false;
+
+
+selectedDownload = null;
+updateButtons();
+}
+/* Update each button's state based off of the
+currently selected download's status. */
+private void updateButtons() {
+if (selectedDownload != null) {
+int status = selectedDownload.getStatus();
+switch (status) {
+case Download.DOWNLOADING:
+pauseButton.setEnabled(true);
+resumeButton.setEnabled(false);
+cancelButton.setEnabled(true);
+clearButton.setEnabled(false);
+break;
+case Download.PAUSED:
+pauseButton.setEnabled(false);
+resumeButton.setEnabled(true);
+cancelButton.setEnabled(true);
+clearButton.setEnabled(false);
+break;
+case Download.ERROR:
+pauseButton.setEnabled(false);
+resumeButton.setEnabled(true);
+cancelButton.setEnabled(false);
+clearButton.setEnabled(true);
+break;
+default: // COMPLETE or CANCELLED
+pauseButton.setEnabled(false);
+resumeButton.setEnabled(false);
+cancelButton.setEnabled(false);
+clearButton.setEnabled(true);
+}
+} else {
+// No download is selected in table.
+pauseButton.setEnabled(false);
+resumeButton.setEnabled(false);
+cancelButton.setEnabled(false);
+clearButton.setEnabled(false);
+}
+}
+/* Update is called when a Download notifies its
+observers of any changes. */
