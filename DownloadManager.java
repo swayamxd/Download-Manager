@@ -105,3 +105,43 @@ public void actionPerformed(ActionEvent e) {
 actionResume();
 }
 });
+resumeButton.setEnabled(false);
+buttonsPanel.add(resumeButton);
+cancelButton = new JButton("Cancel");
+cancelButton.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent e) {
+actionCancel();
+}
+});
+cancelButton.setEnabled(false);
+buttonsPanel.add(cancelButton);
+clearButton = new JButton("Clear");
+clearButton.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent e) {
+actionClear();
+}
+});
+clearButton.setEnabled(false);
+buttonsPanel.add(clearButton);
+// Add panels to display.
+getContentPane().setLayout(new BorderLayout());
+getContentPane().add(addPanel, BorderLayout.NORTH);
+getContentPane().add(downloadsPanel, BorderLayout.CENTER);
+getContentPane().add(buttonsPanel, BorderLayout.SOUTH);
+}
+// Exit this program.
+private void actionExit() {
+System.exit(0);
+}
+// Add a new download.
+private void actionAdd() {
+URL verifiedUrl = verifyUrl(addTextField.getText());
+if (verifiedUrl != null) {
+tableModel.addDownload(new Download(verifiedUrl));
+addTextField.setText(""); // reset add text field
+} else {
+JOptionPane.showMessageDialog(this,
+"Invalid Download URL", "Error",
+JOptionPane.ERROR_MESSAGE);
+}
+}
