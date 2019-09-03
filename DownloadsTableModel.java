@@ -38,19 +38,6 @@ fireTableRowsDeleted(row, row);
 public int getColumnCount() {
 return columnNames.length;
 }
-// Get a column's name.
-public String getColumnName(int col) {
-return columnNames[col];
-}
-// Get a column's class.
-public Class getColumnClass(int col) {
-return columnClasses[col];
-}
-// Get table's row count.
-public int getRowCount() {
-return downloadList.size();
-}
-
 // Get value for a specific row and column combination.
 public Object getValueAt(int row, int col) {
 Download download = downloadList.get(row);
