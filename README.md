@@ -28,5 +28,7 @@ javac DownloadManager.java DownloadsTableModel.java ProgressRenderer.java Downlo
 RUN DOWNLOAD MANAGER LIKE THIS:
 
 java DownloadManager
+      
       or,
+
 javaw DownloadManager
