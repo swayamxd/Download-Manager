@@ -21,7 +21,7 @@ and explaining how they relate to each other.
 
 # COMPILING AND RUNNING THE DOWNLOAD MANAGER
 
-COMPILE THE DDOWNLOAD MANAGER LIKE THIS:
+COMPILE THE DOWNLOAD MANAGER LIKE THIS:
 
 javac DownloadManager.java DownloadsTableModel.java ProgressRenderer.java Download.java
 
