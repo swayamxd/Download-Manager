@@ -18,3 +18,15 @@ for displaying the current list of downloads. The Download class represents a â€
 download and is responsible for performing the actual downloading of a file. In the following
 sections, weâ€™ll walk through each of these classes in detail, highlighting their inner workings
 and explaining how they relate to each other.
+
+# COMPILING AND RUNNING THE DOWNLOAD MANAGER
+
+COMPILE THE DDOWNLOAD MANAGER LIKE THIS:
+
+javac DownloadManager.java DownloadsTableModel.java ProgressRenderer.java Download.java
+
+RUN DOWNLOAD MANAGER LIKE THIS:
+
+java DownloadManager
+      or,
+javaw DownloadManager
