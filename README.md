@@ -29,6 +29,6 @@ RUN DOWNLOAD MANAGER LIKE THIS:
 
 java DownloadManager
       
-      or,
+or,
 
 javaw DownloadManager
